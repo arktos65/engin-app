@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2022_06_27_160117) do
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.boolean "shared"
-    t.boolean "administration"
+    t.boolean "shared", default: false
+    t.boolean "administration", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_roles_on_name"
