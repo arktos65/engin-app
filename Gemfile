@@ -17,9 +17,8 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-
 # Admin panel framework
-gem 'trestle'
+gem 'trestle', '~> 0.9.6'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -35,6 +34,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # RSpec software testing framework
+  gem 'rspec-rails', '~>5.1.2'
+  # Code quality check using a linter
+  gem 'rubocop', '~>1.31'
+  gem 'rubocop-rails', '~>2.15.1'
+  gem 'rubocop-rspec', '~>2.11.1'
 end
 
 group :development do
