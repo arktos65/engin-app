@@ -13,11 +13,12 @@
 ActiveRecord::Schema.define(version: 2022_06_27_134809) do
 
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "division"
     t.string "manager"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_departments_on_name", unique: true
   end
 
 end
