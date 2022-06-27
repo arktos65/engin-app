@@ -53,5 +53,16 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  # Keeping database clean for testing purposes
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
+  # Data generators to be used in testing
+  gem 'factory_bot_rails', '~> 6.2'
+  # Library for generating fake data
+  gem 'faker', '~> 2.21'
+  # Simplifies matching tests in RSpec
+  gem 'shoulda-matchers', '~> 5.1'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
