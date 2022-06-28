@@ -1,15 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe ValueStream, type: :model do
+RSpec.describe Stream, type: :model do
   subject {
-    described_class.new(name: "Software Project",
+    described_class.new(name: "Stream 1",
                         stakeholder: "Jane Doe",
-                        stakeholder_email: "jane.done@company.com")
+                        stakeholder_email: "jane.doe@company.com")
   }
+
   it "is valid with valid attributes" do
     expect(subject).to be_valid
   end
-  it "is not valid without value stream name" do
+  it "is invalid without Stream name attribute" do
     subject.name = nil
     expect(subject).to_not be_valid
   end

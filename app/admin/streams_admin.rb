@@ -1,6 +1,6 @@
-Trestle.resource(:value_streams) do
+Trestle.resource(:streams) do
   menu do
-    item :value_streams, icon: "fa fa-star"
+    item :streams, icon: "fa fa-star"
   end
 
   # Customize the table columns shown on the index view.
@@ -13,7 +13,7 @@ Trestle.resource(:value_streams) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |value_stream|
+  # form do |stream|
   #   text_field :name
   #
   #   row do
@@ -30,6 +30,6 @@ Trestle.resource(:value_streams) do
   #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
   #
   # params do |params|
-  #   params.require(:value_stream).permit(:name, ...)
+  #   params.require(:stream).permit(:name, ...)
   # end
 end
