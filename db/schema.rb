@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_28_165957) do
+ActiveRecord::Schema.define(version: 2022_06_28_172422) do
 
   create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "symbol", limit: 10, null: false
@@ -27,19 +27,6 @@ ActiveRecord::Schema.define(version: 2022_06_28_165957) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_departments_on_name", unique: true
-  end
-
-  create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "value_streams_id", null: false
-    t.string "name", limit: 50, null: false
-    t.boolean "internal", default: false
-    t.date "start_date"
-    t.date "end_date"
-    t.boolean "active", default: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_projects_on_name"
-    t.index ["value_streams_id"], name: "index_projects_on_value_streams_id"
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -62,14 +49,13 @@ ActiveRecord::Schema.define(version: 2022_06_28_165957) do
     t.index ["name"], name: "index_sources_on_name"
   end
 
-  create_table "value_streams", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "streams", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.string "stakeholder", limit: 50
     t.string "stakeholder_email", limit: 50
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_value_streams_on_name"
+    t.index ["name"], name: "index_streams_on_name"
   end
 
-  add_foreign_key "projects", "value_streams", column: "value_streams_id"
 end
