@@ -19,6 +19,10 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Admin panel framework
 gem 'trestle', '~> 0.9.6'
+# Trestle authentication library
+gem 'trestle-auth', '~> 0.4.4'
+# Jira API library
+gem 'jira-ruby', '~> 2.2'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -48,8 +52,6 @@ group :development, :test do
   gem 'faker', '~> 2.21'
   # Simplifies matching tests in RSpec
   gem 'shoulda-matchers', '~> 5.1'
-  # Jira API library
-  gem 'jira-ruby', '~> 2.2'
 end
 
 group :development do
