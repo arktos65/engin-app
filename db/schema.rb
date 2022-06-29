@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_28_180756) do
+ActiveRecord::Schema.define(version: 2022_06_29_193317) do
 
   create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "symbol", limit: 10, null: false
@@ -86,8 +86,27 @@ ActiveRecord::Schema.define(version: 2022_06_28_180756) do
     t.index ["name"], name: "index_streams_on_name"
   end
 
+  create_table "teams", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "project_id", null: false
+    t.integer "annual_rate", null: false
+    t.integer "weekly_rate", null: false
+    t.bigint "currency_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "allocation", default: 100
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["currency_id"], name: "index_teams_on_currency_id"
+    t.index ["member_id"], name: "index_teams_on_member_id"
+    t.index ["project_id"], name: "index_teams_on_project_id"
+  end
+
   add_foreign_key "members", "departments"
   add_foreign_key "members", "roles"
   add_foreign_key "members", "sources"
   add_foreign_key "projects", "streams"
+  add_foreign_key "teams", "currencies"
+  add_foreign_key "teams", "members"
+  add_foreign_key "teams", "projects"
 end
