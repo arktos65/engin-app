@@ -8,9 +8,6 @@ class CreateMembers < ActiveRecord::Migration[6.1]
       t.belongs_to :source, null: false, foreign_key: true
       t.date :start_date
       t.date :end_date
-      t.integer :annual_rate, default: 0
-      t.integer :weekly_rate, default: 0
-      t.belongs_to :currency, null: false, foreign_key: true
       t.boolean :active, default: true
 
       t.timestamps
