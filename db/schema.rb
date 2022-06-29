@@ -37,13 +37,9 @@ ActiveRecord::Schema.define(version: 2022_06_28_180756) do
     t.bigint "source_id", null: false
     t.date "start_date"
     t.date "end_date"
-    t.integer "annual_rate", default: 0
-    t.integer "weekly_rate", default: 0
-    t.bigint "currency_id", null: false
     t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["currency_id"], name: "index_members_on_currency_id"
     t.index ["department_id"], name: "index_members_on_department_id"
     t.index ["role_id"], name: "index_members_on_role_id"
     t.index ["source_id"], name: "index_members_on_source_id"
@@ -90,7 +86,6 @@ ActiveRecord::Schema.define(version: 2022_06_28_180756) do
     t.index ["name"], name: "index_streams_on_name"
   end
 
-  add_foreign_key "members", "currencies"
   add_foreign_key "members", "departments"
   add_foreign_key "members", "roles"
   add_foreign_key "members", "sources"
