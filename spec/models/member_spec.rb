@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
+  test_department = build(:department)
+  test_source = build(:source)
+  test_role = build(:role)
+
   my_department = Department.create(name: "Engineering",
                                     division: "Technology",
                                     manager: "John Doe")
