@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_29_193317) do
+ActiveRecord::Schema.define(version: 2022_06_29_223224) do
 
   create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "symbol", limit: 10, null: false
@@ -100,6 +100,17 @@ ActiveRecord::Schema.define(version: 2022_06_29_193317) do
     t.index ["currency_id"], name: "index_teams_on_currency_id"
     t.index ["member_id"], name: "index_teams_on_member_id"
     t.index ["project_id"], name: "index_teams_on_project_id"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "remember_token"
+    t.datetime "remember_token_expires_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "members", "departments"
