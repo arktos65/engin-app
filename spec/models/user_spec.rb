@@ -7,4 +7,14 @@ RSpec.describe User, type: :model do
   it "is valid with valid attributes" do
     expect(test_user).to be_valid
   end
+
+  it "is not valid when email address is missing" do
+    test_user.email = nil
+    expect(test_user).to_not be_valid
+  end
+
+  it "is not valid when password is missing" do
+    test_user.password_digest = nil
+    expect(test_user).to_not be_valid
+  end
 end
