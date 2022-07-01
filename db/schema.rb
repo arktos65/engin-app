@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_29_223224) do
+ActiveRecord::Schema.define(version: 2022_07_01_144018) do
 
   create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "symbol", limit: 10, null: false
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2022_06_29_223224) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "jira_project_id"
+    t.string "jira_project_name"
     t.index ["stream_id"], name: "index_projects_on_stream_id"
   end
 
