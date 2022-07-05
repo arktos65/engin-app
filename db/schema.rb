@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_01_144018) do
+ActiveRecord::Schema.define(version: 2022_07_05_154027) do
 
   create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "symbol", limit: 10, null: false
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 2022_07_01_144018) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_departments_on_name", unique: true
+  end
+
+  create_table "jira_projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.integer "jira_project_id", null: false
+    t.string "name", null: false
+    t.string "jira_key", null: false
+    t.integer "total_issue_count", default: 0
+    t.datetime "last_issue_update"
+    t.string "self_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jira_project_id"], name: "index_jira_projects_on_jira_project_id"
+    t.index ["name"], name: "index_jira_projects_on_name"
+    t.index ["project_id"], name: "index_jira_projects_on_project_id"
   end
 
   create_table "members", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -54,8 +69,6 @@ ActiveRecord::Schema.define(version: 2022_07_01_144018) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "jira_project_id"
-    t.string "jira_project_name"
     t.index ["stream_id"], name: "index_projects_on_stream_id"
   end
 
@@ -105,8 +118,8 @@ ActiveRecord::Schema.define(version: 2022_07_01_144018) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.string "first_name"
     t.string "last_name"
     t.string "remember_token"
@@ -115,6 +128,7 @@ ActiveRecord::Schema.define(version: 2022_07_01_144018) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "jira_projects", "projects"
   add_foreign_key "members", "departments"
   add_foreign_key "members", "roles"
   add_foreign_key "members", "sources"
