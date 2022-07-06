@@ -1,0 +1,25 @@
+# Jira configuration settings by environment
+
+development:
+  site: "https://url"
+  username: "INSERT USERNAME"
+  password: "INSERT PASSWORD"
+  context_path: "" # Usually blank
+  auth_type: basic
+  read_timeout: 120
+
+test:
+  site: "https://url"
+  username: "INSERT USERNAME"
+  password: "INSERT PASSWORD"
+  context_path: "" # Usually blank
+  auth_type: basic
+  read_timeout: 120
+
+production:
+  site: "https://url"
+  username: "INSERT USERNAME"
+  password: "INSERT PASSWORD"
+  context_path: "" # Usually blank
+  auth_type: basic
+  read_timeout: 120
