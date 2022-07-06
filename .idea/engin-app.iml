@@ -106,6 +106,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.11.0, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop (v1.31.0, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.18.0, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubocop-faker (v1.1.0, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-rails (v2.15.1, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-rspec (v2.11.1, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-progressbar (v1.11.0, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />

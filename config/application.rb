@@ -34,5 +34,8 @@ module EnginApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Enable Sidekiq for background automation and scheduling
+    config.active_job.queue_adapter = :sidekiq
   end
 end
