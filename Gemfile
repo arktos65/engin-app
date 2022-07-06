@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop', '~>1.31'
   gem 'rubocop-rails', '~>2.15.1'
   gem 'rubocop-rspec', '~>2.11.1'
+  gem 'rubocop-faker', '~> 1.1'
   # Keeping database clean for testing purposes
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   # Data generators to be used in testing
