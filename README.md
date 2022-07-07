@@ -114,7 +114,7 @@ You should see something similar to below:
 
 Start the Redis server by running the `start-redis.sh` script in the root directory of the application.
 
-    ./start-docker.sh
+    ./start-redis.sh
 
 Confirm that Redis is now running by using the command:
 
