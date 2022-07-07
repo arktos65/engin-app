@@ -6,16 +6,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-
-# app = Doorkeeper::Application.create! :name => "Barrique API",
-#                                       :redirect_uri => "https://localhost:3000/callback"
-#
-# puts "Application: "
-# puts "name: #{app.name}"
-# puts "redirect_uri: #{app.redirect_uri}"
-# puts "uid: #{app.uid}"
-# puts "secret: #{app.secret}"
-#
 puts "Task->Seeding database:"
 
 # Default user
@@ -27,6 +17,7 @@ user = User.create!(
   first_name: "Test",
   last_name: "User'"
 ) if user.nil?
+user.save
 puts " * [OK] User (seed)"
 
 # Default departments
@@ -40,6 +31,7 @@ while i < 5 do
                                   manager: Faker::Name.name) if department.nil?
   i+=1
 end
+department.save
 puts " * [OK] Departments (seed)"
 
 # Default sources
@@ -54,6 +46,7 @@ while i < 4
                           contact_email: Faker::Internet.email) if source.nil?
   i += 1
 end
+source.save
 puts " * [OK] Sources (seed)"
 
 # Default value streams
@@ -66,6 +59,7 @@ while i < 5
                           stakeholder_email: Faker::Internet.email) if stream.nil?
   i += 1
 end
+stream.save
 puts " * [OK] Value Streams (seed)"
 
 # Default projects
@@ -80,18 +74,20 @@ while i < 5
                             active: true) if project.nil?
   i += 1
 end
+project.save
 puts " * [OK] Projects (seed)"
 
 # Default roles
 i = 1
 while i < 9
-  role = Role.find_by(id: 1)
+  role = Role.find_by(id: i)
   role = Role.create!(id: i,
                       name: Faker::Job.title,
                       shared: false,
                       administration: false) if role.nil?
   i += 1
 end
+role.save
 puts " * [OK] Roles (seed)"
 
 # Default currencies
@@ -103,7 +99,42 @@ while i < 7
                               USDExchange: 1.2) if currency.nil?
   i += 1
 end
+currency.save
 puts " * [OK] Currencies (seed)"
+
+# Default members
+i = 1
+while i < 11
+  member = Member.find_by(id: i)
+  member = Member.create!(id: i,
+                          first_name: Faker::Name.first_name,
+                          last_name: Faker::Name.last_name,
+                          role_id: Faker::Number.between(from:1, to:8),
+                          department_id: Faker::Number.between(from:1, to: 4),
+                          source_id: Faker::Number.between(from: 1, to: 3),
+                          start_date: Faker::Date.backward(days: i * 30),
+                          active: true) if member.nil?
+  i += 1
+end
+member.save
+puts " * [OK] Members (seed)"
+
+# Default teams
+i = 1
+while i < 11
+  team = Team.find_by(id: i)
+  team = Team.create!(id: i,
+                      member_id: i,
+                      project_id: Faker::Number.between(from: 1, to: 4),
+                      annual_rate: Faker::Number.between(from: 80000, to: 140000),
+                      weekly_rate: Faker::Number.between(from: 1538, to: 2692),
+                      currency_id: Faker::Number.between(from: 1, to: 6),
+                      start_date: Date.today,
+                      allocation: 100) if team.nil?
+  i += 1
+end
+team.save
+puts " * [OK] Teams (seed)"
 
 # Share default credentials with the user
 puts ""
