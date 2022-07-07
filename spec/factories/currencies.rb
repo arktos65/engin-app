@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :currency do
-    symbol { Faker::Finance.ticker }
-    USDExchange { Faker::Number.between(1..3) }
+    symbol { Faker::Currency.code }
+    USDExchange { Faker::Number.between(from: 1, to: 3) }
   end
 end
