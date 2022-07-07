@@ -4,7 +4,7 @@ This document provideesw an overview of the EngIn application for managing and r
 on product development costs by value stream.  You will also find instructions for setting up
 development and test environments.
 
-**Requirements:** Ruby ~> v2.7.2, Rails ~> v6.1.6, MySQL Server ~> 8.0
+**Requirements:** Ruby ~> v2.7.2, Rails ~> v6.1.6, MySQL Server ~> 8.0, Docker Desktop, Redis
 
 ## Development Prerequisites
 
@@ -14,6 +14,7 @@ TGW API project:
 * Ruby Version Manager (http://www.rvm.io/)
 * MySQL Server CE (https://dev.mysql.com/downloads/)
 * MySQL Workbench (optional)
+* Docker Desktop (required to run Redis)
 * Editor or IDE (suggest RubyMine from JetBrains)
 * HomeBrew (for MacOS)
 
@@ -60,32 +61,69 @@ Edit your /etc/hosts file and add the following line:
 
 ### Initialize Database Environment
 
-These instructions assume you're running MySQL as a containerized service defined in the project's
-`docker-compose.yml` file..  Take a look at the `config/database.yml` file to see what you should
-set your database credentials to.
+You will need to install MySQL 8 either locally on your development machine or run the containerized version.
+MySQL setup instructions are outside the scope of this document. Verify that your `confif/database.yml` file
+is setup correctly for your MySQL installation.
 
-From the root source code directory:
+In a termainal window, from the root source code directory:
 
     $ rvm use 2.7.2@engin-app
-    $ docker-compose up auth-db
-
-Open a new terminal window and then:
-
-    $ rvm use 2.6.6@tgw
     $ rails db:create db:migrate
     $ rails db:seed
 
 You should see some messages starting with:
 
-    Created database 'tgw-auth_development'
-    Created database 'tgw-auth_test'
-    Task seed:
-     * [  ] User (seed)
+    Task->Seeding database:
      * [OK] User (seed)
-     * [  ] Admin (seed)
-     * [OK] Admin (seed)
+     * [OK] Departments (seed)
+     * [OK] Sources (seed)
+     * [OK] Value Streams (seed)
+     * [OK] Projects (seed)
+     * [OK] Roles (seed)
+     * [OK] Currencies (seed)
+     * [OK] Members (seed)
+     * [OK] Teams (seed)
+
+    Default user credentials:
+    Username: admin@example.com
+    Password: password123
 
 This means your database environment has been successfully initialized.
+
+### Setting Up Redis Server
+
+This application uses the Sidekiq gem to manage asynchronous background tasks such as automatically syncing the
+database with your Jira instance and other reporting jobs that run on a regular schedule.  Sidekiq requires 
+a Redis server for maintaining state information.  After installing Docker Desktop, from a terminal:
+
+    $ docker pull redis
+
+You should see something similar to below:
+
+    Using default tag: latest
+    latest: Pulling from library/redis
+    b85a868b505f: Pull complete
+    b09642bd3b88: Pull complete
+    e0678a951c8d: Pull complete
+    d5d7c0a1681b: Pull complete
+    954286b64dd1: Pull complete
+    58024fcab1ef: Pull complete
+    Digest: sha256:d581aded52343c461f32e4a48125879ed2596291f4ea4baa7e3af0ad1e56feed
+    Status: Downloaded newer image for redis:latest
+    docker.io/library/redis:latest
+
+Start the Redis server by running the `start-redis.sh` script in the root directory of the application.
+
+    ./start-docker.sh
+
+Confirm that Redis is now running by using the command:
+
+    $ docker ps
+
+    CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                    NAMES
+    45a54c905509   redis     "docker-entrypoint.s…"   16 seconds ago   Up 15 seconds   0.0.0.0:6379->6379/tcp   redis
+
+By default, Sidekiq will look for the Redis server on `localhost` at the default port of `6379`.
 
 ### Test the Application
 
@@ -110,132 +148,7 @@ You should see:
 Now open your web browser and type in `http://localhost:3000/`.  If the application is healthy, you should
 see a login page.
 
-    {
-      "service":"TGW OAuth Service::API",
-      "version":"0.3.1",
-      "rails_version":"5.2.0",
-      "ruby_version":"2.6.6",
-      "database_connection":"OK",
-      "timestamp":"2018-08-01T14:09:34.018-07:00"
-    }
-
 You can stop the application by pressing CTRL-C in the terminal window where it is running.
-
-### User Login
-
-The OAuth development environment is seeded with a user for testing purposes. You can login by
-pointing your web browser at `http://localhost:3000/users/sign_in`.
-
-**Development Credentials**
-
-    Username: user@tgwconsulting.co
-    Password: password123
-
-These credentials are only available on your development instance.
-
-### Admin Login
-
-The OAuth development environment is seeded with an admin user for testing purposes.  You can
-login by pointing your web browser at `http://localhost:3000/admins/sign_in`.
-
-**Development Credentials**
-
-    Username: admin@tgwconsulting.co
-    Password: password123
-
-These credentials are only available on your development instance.
-
-### OAuth Applications
-
-Admin users can manage OAuth applications registered with this provider by pointing your web
-browser at `http://localhost:3000/oauth/applications`.
-
-## Generating API Documentation
-
-This project using `rswagger` for generating API developer documentation.  To update the documentation:
-
-    rake rswag:specs:swaggerize
-
-The documentation is accessible at `http://localhost:3000/api-docs`.
-
-## Building a Docker Image
-
-By design, when Github code is merged to the `master` branch, a build job is triggered on Azure DevOps to build
-a Docker image from that branch and is pushed up to Docker Hub.  Code merged to the `stage` branch will automatically
-produce a stage environment Docker image.
-
-If you wish to manually build an image, use the following command from the project root directory:
-
-    $ docker-compose build
-
-The resulting image will be stored in your local Docker image repository.  The image will be titled
-`tgwconsulting/tgw-oauth:latest`.
-
-## Running Your Development Environment
-
-This project uses Docker Compose making it very simple to start your development environment with all the
-associated services in various containers.
-
-Starting the TGW Auth service:
-
-    $ cd <project_root>/helm
-    $ helm install auth-service tgw-auth
-    
-    NAME: auth-service
-    LAST DEPLOYED: Mon Nov  9 09:40:47 2020
-    NAMESPACE: default
-    STATUS: deployed
-    REVISION: 1
-    NOTES:
-    1. Get the application URL by running these commands:
-
-NOTE: It is common for the auth-server pods to restart once when installing the service because of timing issues
-between the initialization of the `auth-db` pod.  The `auth-server` pods will recycle automatically.
-
-To perform a graceful shutdown of your development environment:
-
-    $ cd <project_root>/helm
-    $ helm uninstall auth-service
-    
-    release "auth-service" uninstalled
-
-### Testing OAuth Server
-
-Once you have deployed the Rails application to your local Kubernetes cluster, you'll need to forward the port
-to the `TGW-server` service.  This can be done with the command:
-
-    $ kubectl port-forward deployment/auth-server 3000
-
-Direct your web browser to `http://localhost:3000` to access the service.
-
-### Examining a Docker Image
-
-If you need to explore the contents of the Docker image, you may do so with the following command:
-
-    $ docker run --rm -it --entrypoint=/bin/bash tgwconsulting/tgw-oauth
-
-Docker will start a container with a `bash` shell.  This command is useful for checking service source code.
-
-# Kubernetes Deployments
-
-The TGW Auth and related services are containerized and can run in Docker or Kubernetes environments.  Kubernetes
-deployments are managed by Helm charts.  Be sure to enable Kubernetes in your local Docker Desktop environment.
-
-## Setting up Helm for Kubernetes
-
-Helm is a tool for managing Charts. Charts are packages of pre-configured Kubernetes resources.
-
-Use Helm to:
-
-- Find and use popular software packaged as Helm Charts to run in Kubernetes
-- Share your own applications as Helm Charts
-- Create reproducible builds of your Kubernetes applications
-- Intelligently manage your Kubernetes manifest files
-- Manage releases of Helm packages
-
-The source code to the Helm charts for this service are stored in the `helm` directory in the project root.
-
-    helm repo add stable https://charts.helm.sh/stable
 
 # License & Authors
 

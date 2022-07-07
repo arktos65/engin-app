@@ -56,8 +56,6 @@ group :development, :test do
   gem 'faker', '~> 2.21'
   # Simplifies matching tests in RSpec
   gem 'shoulda-matchers', '~> 5.1'
-  # RSpec testing for SideKiq
-  gem 'rspec-sidekiq', '~> 3.1'
 end
 
 group :development do
@@ -73,6 +71,8 @@ end
 
 group :test do
   # Add here for test suite only
+  # RSpec testing for SideKiq
+  gem 'rspec-sidekiq', '~> 3.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
