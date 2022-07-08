@@ -1,5 +1,3 @@
-require 'lib/jira_connector'
-
 class ExportProjectsJob < ApplicationJob
   queue_as :default
 

@@ -9,7 +9,7 @@ development and test environments.
 ## Development Prerequisites
 
 The following prerequisites should be installed on your workstation before working on the
-TGW API project:
+EngIn app project:
 
 * Ruby Version Manager (http://www.rvm.io/)
 * MySQL Server CE (https://dev.mysql.com/downloads/)
@@ -149,6 +149,15 @@ Now open your web browser and type in `http://localhost:3000/`.  If the applicat
 see a login page.
 
 You can stop the application by pressing CTRL-C in the terminal window where it is running.
+
+## Local Jira Development & Testing
+
+If you wish to develop and test against a local Jira instance use the following:
+
+- Install Atlassian SDK - https://developer.atlassian.com/server/framework/atlassian-sdk/install-the-atlassian-sdk-on-a-linux-or-mac-system/
+- Run standalone Jira with command `$ atlas-run-standalone --product jira`
+
+Once this is running, you should be able to connect to `http://localhost:2990/jira` and login to the JIRA admin system using `admin:admin`.
 
 # License & Authors
 
