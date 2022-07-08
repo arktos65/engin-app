@@ -4,7 +4,7 @@ MAINTAINER Sean M. Sullivan <sean.sullivan@beatport.com>
 # Install dependencies:
 # - build-essential: To ensure certain gems can be compiled
 # - nodejs: Compile assets
-RUN apt-get update -qq && apt-get install -y build-essential default-libmysqlclient-dev nodejs
+RUN apt-get update -qq && apt-get install -y build-essential default-libmysqlclient-dev nodejs npm
 
 FROM build AS build_1
 # Set an environment variable to store where the app is installed to inside
@@ -21,6 +21,8 @@ WORKDIR $INSTALL_PATH
 COPY Gemfile $INSTALL_PATH/Gemfile
 COPY Gemfile.lock $INSTALL_PATH/Gemfile.lock
 RUN gem install bundler:2.1.4 && bundle install --no-cache
+RUN npm install --global yarn
+
 
 # Copy in the application code from your work station at the current directory
 # over to the working directory.
