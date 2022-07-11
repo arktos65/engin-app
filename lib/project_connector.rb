@@ -1,7 +1,5 @@
-require 'jira-ruby'
-
-module JiraConnect
-  def get_connector
+module ProjectConnector
+  def get_options
     # NOTE: the token should not be encoded
     api_token = ENV['JIRA_API_KEY']
 
