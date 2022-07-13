@@ -1,8 +1,10 @@
 <h1>Jira Projects</h1>
 <ul>
-  <% @projects.each do |project| %>
+  <% i = 0 %>
+  <% while i < @projects.count %>
   <li>
-    <% project.id %> - <% project.name %>
+    Project -> key: <%= @projects[i].key %>, name: <%= @projects[i].name %>
+    <% i += 1 %>
   </li>
   <% end %>
 </ul>

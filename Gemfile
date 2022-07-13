@@ -26,6 +26,8 @@ gem 'jira-ruby', '~> 2.2'
 # Background automation tools
 gem 'sidekiq', '~> 6.5', '>= 6.5.1'
 gem 'sidekiq-scheduler', '~> 4.0', '>= 4.0.2'
+# JSON Parsing
+gem 'json', '~> 2.6', '>= 2.6.2'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
