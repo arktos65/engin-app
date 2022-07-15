@@ -1,4 +1,4 @@
-include "jira-ruby"
+require 'jira-ruby'
 
 module ProjectsLoader
   include ProjectConnector
@@ -10,8 +10,11 @@ module ProjectsLoader
     projects = client.Project.all
 
     # Iterate through projects and upsert each record to database
-    projects.each do |project|
-      upsert_project(project)
+    i = 0
+    while i < projects.count
+      puts "Project: #{projects[i].name}"
+      upsert_project(projects[i])
+      i += 1
     end
   end
 

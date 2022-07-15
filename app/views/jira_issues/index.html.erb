@@ -1,2 +1,8 @@
 <h1>JiraIssues#index</h1>
-<p>Find me in app/views/jira_issues/index.html.erb</p>
+<% i = 0 %>
+<% while i < @issues.count %>
+  <li>
+    Project -> name: <%= @issues[i].project.name %>, Issue: <%= @issues[i].summary %>
+    <% i += 1 %>
+  </li>
+<% end %>

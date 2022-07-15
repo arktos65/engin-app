@@ -4,12 +4,13 @@ class JiraIssuesController < ApplicationController
   # GET /jira/project/:id/issues
   def index
     client = JIRA::Client.new(get_options)
-    issues = client.Issue.all
+    @project = client.Project.find(params[:jira_project_id])
+    @issues = @project.issues
   end
 
-  # GET /jira/project/:id/issue/:id
+  # GET /jira/issue/:id
   def show
     client = JIRA::Client.new(get_options)
-    isue = client.Issue.find(params[:id])
+    @issue = client.Issue.find(params[:id])
   end
 end

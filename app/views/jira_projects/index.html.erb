@@ -3,7 +3,7 @@
   <% i = 0 %>
   <% while i < @projects.count %>
   <li>
-    Project -> key: <%= @projects[i].key %>, name: <%= @projects[i].name %>
+    Project -> id: <%= @projects[i].id %>, key: <%= @projects[i].key %>, name: <%= @projects[i].name %>
     <% i += 1 %>
   </li>
   <% end %>
