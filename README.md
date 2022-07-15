@@ -90,6 +90,22 @@ You should see some messages starting with:
 
 This means your database environment has been successfully initialized.
 
+### Manually Loading Jira Data
+
+In your development database, you may manually load or update data from Jira with your database.  To do this, you will
+need to use the Rails Console.  From the root directory of the EnginApp code base:
+
+    $ rvm use
+    $ rails console
+    The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+    Running via Spring preloader in process 15504
+    Loading development environment (Rails 6.1.6)
+    2.7.2 :001 > include ProjectsLoader
+     => Object
+    2.7.2 :002 > update_all_projects
+    ...
+    2.7.2 :003 > quit
+
 ### Setting Up Redis Server
 
 This application uses the Sidekiq gem to manage asynchronous background tasks such as automatically syncing the

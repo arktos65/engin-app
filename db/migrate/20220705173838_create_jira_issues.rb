@@ -3,11 +3,11 @@ class CreateJiraIssues < ActiveRecord::Migration[6.1]
     create_table :jira_issues do |t|
       t.integer :jira_issue_id
       t.belongs_to :jira_project, null: false, foreign_key: true
-      t.string :issue_key, null: false
-      t.string :issue_url, null: false
+      t.text :issue_key, null: false
+      t.text :issue_url, null: false
       t.text :issue_title, null: false
-      t.string :issue_status, null: false
-      t.string :issue_type, null: false
+      t.text :issue_status, null: false
+      t.text :issue_type, null: false
       t.integer :story_points, default: 1
       t.datetime :issue_created
       t.datetime :issue_updated
