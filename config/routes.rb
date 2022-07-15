@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'home/index'
-  get 'jira_issues/index'
-  get 'jira_issues/show'
-  get 'jira_projects/index'
-  get 'jira_projects/show'
+
+  resources :jira_projects, only: [:index, :show], path: '/projects' do
+    resources :jira_issues, only: [:index, :show], path: '/issues'
+  end
 
   root to: "home#index"
 end
