@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(version: 2022_07_05_173838) do
   end
 
   add_foreign_key "jira_issues", "jira_projects"
-  add_foreign_key "jira_projects", "projects"
   add_foreign_key "members", "departments"
   add_foreign_key "members", "roles"
   add_foreign_key "members", "sources"
