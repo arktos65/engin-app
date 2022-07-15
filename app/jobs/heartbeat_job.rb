@@ -9,6 +9,6 @@ class HeartbeatJob < ApplicationJob
 
   def perform(*args)
     sleep 15
-    p "EngIn App alive #{Time.now().strftime('%F - %H:%M:%S.%L')}"
+    puts "EngIn App alive #{Time.now().strftime('%F - %H:%M:%S.%L')}"
   end
 end
