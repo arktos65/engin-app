@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 2022_07_05_173838) do
   create_table "jira_issues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "jira_issue_id"
     t.bigint "jira_project_id", null: false
-    t.string "issue_key", null: false
-    t.string "issue_url", null: false
+    t.text "issue_key", null: false
+    t.text "issue_url", null: false
     t.text "issue_title", null: false
-    t.string "issue_status", null: false
-    t.string "issue_type", null: false
+    t.text "issue_status", null: false
+    t.text "issue_type", null: false
     t.integer "story_points", default: 1
     t.datetime "issue_created"
     t.datetime "issue_updated"
@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(version: 2022_07_05_173838) do
     t.bigint "project_id", null: false
     t.integer "jira_project_id", null: false
     t.string "name", null: false
-    t.string "jira_key", null: false
+    t.text "jira_key", null: false
     t.integer "total_issue_count", default: 0
     t.datetime "last_issue_update"
-    t.string "self_url"
+    t.text "self_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["jira_project_id"], name: "index_jira_projects_on_jira_project_id"
