@@ -1,7 +1,7 @@
 class CreateJiraProjects < ActiveRecord::Migration[6.1]
   def change
     create_table :jira_projects do |t|
-      t.belongs_to :project, null: false, foreign_key: true
+      t.belongs_to :project, null: false, foreign_key: false
       t.integer :jira_project_id, null: false
       t.string :name, null: false
       t.string :jira_key, null: false

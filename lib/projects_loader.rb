@@ -28,21 +28,27 @@ module ProjectsLoader
   # table.
   def upsert_project(the_project)
     project = JiraProject.find_by(jira_project_id: the_project.id)
-    project = JiraProject.create!(
-      jira_project_id: the_project.id,
-      name: the_project.name,
-      jira_key: the_project.key,
-      total_issue_count: 0,
-      last_issue_update: DateTime.now,
-      self_url: the_project.self
-    ) if project.nil?
-    project = JiraProject.update!(
-      name: the_project.name,
-      jira_key: the_project.key,
-      total_issue_count: 0,
-      last_issue_update: DateTime.now,
-      self_url: the_project.self
-    ) unless project.nil?
-    project.save
+    unless project.nil?
+      # Record exists, so update it
+      project.update(
+        name: the_project.name,
+        jira_key: the_project.key,
+        total_issue_count: 0,
+        last_issue_update: DateTime.now,
+        self_url: the_project.self
+      )
+    else
+      # Record doesn't exist, so create a new one
+      project = JiraProject.create!(
+        project_id: 0,
+        jira_project_id: the_project.id,
+        name: the_project.name,
+        jira_key: the_project.key,
+        total_issue_count: 0,
+        last_issue_update: DateTime.now,
+        self_url: the_project.self
+      )
+      project.save
+    end
   end
 end
