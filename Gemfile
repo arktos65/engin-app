@@ -21,6 +21,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'trestle', '~> 0.9.6'
 # Trestle authentication library
 gem 'trestle-auth', '~> 0.4.4'
+# Trestle Sidekiq library
+gem 'trestle-sidekiq', '~> 0.1.1'
 # Jira API library
 gem 'jira-ruby', '~> 2.2'
 # Background automation tools
