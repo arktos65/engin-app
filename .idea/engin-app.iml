@@ -132,6 +132,7 @@
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.10, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="trestle (v0.9.6, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="trestle-auth (v0.4.4, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="trestle-sidekiq (v0.1.1, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="turbolinks (v5.2.1, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="turbolinks-source (v5.2.0, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, RVM: ruby-2.7.2 [engin-app]) [gem]" level="application" />

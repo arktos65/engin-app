@@ -136,6 +136,49 @@ end
 team.save
 puts " * [OK] Teams (seed)"
 
+# Default Jira projects
+i = 1
+while i < 5
+  jira_project = JiraProject.find_by(id: i)
+  jira_project = JiraProject.create!(id: i,
+                                project_id: Faker::Number.between(from: 1, to: 4),
+                                jira_project_id: i,
+                                name: Faker::App.name,
+                                jira_key: Faker::String.random(length:4),
+                                total_issue_count: 0,
+                                last_issue_update: DateTime.now,
+                                self_url: Faker::Internet.url)
+  i += 1
+end
+jira_project.save
+puts " * [OK] Jira Projects (seed)"
+
+# Default Jira issues
+i = 1
+while i < 5
+  x = 1
+  while x < 10
+    key = (i * 10) + x
+    jira_issue = JiraIssue.find_by(id: key)
+    jira_issue = JiraIssue.create!(id: key,
+                                   jira_issue_id: key,
+                                   jira_project_id: i,
+                                   issue_key: Faker::String.random(length: 5),
+                                   issue_url: Faker::Internet.url,
+                                   issue_title: Faker::Lorem.words(number: 5),
+                                   issue_status: "Closed",
+                                   issue_type: "Story",
+                                   story_points: Faker::Number.between(from: 1, to: 8),
+                                   issue_created: DateTime.now,
+                                   issue_updated: DateTime.now
+                                   )
+    x += 1
+  end
+  i += 1
+end
+jira_issue.save
+puts " * [OK] Jira Issues (seed)"
+
 # Share default credentials with the user
 puts ""
 puts "Default user credentials:"

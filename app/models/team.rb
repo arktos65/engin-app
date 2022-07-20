@@ -10,6 +10,6 @@ class Team < ApplicationRecord
 
   # Calculate the weekly rate by taking annual rate divided by 52 weeks
   def calculate_weekly
-    self.weekly_rate = self.annual_rate/52
+    self.weekly_rate = self.annual_rate / 52
   end
 end

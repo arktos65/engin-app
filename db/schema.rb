@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2022_07_05_173838) do
     t.integer "total_issue_count", default: 0
     t.datetime "last_issue_update"
     t.text "self_url"
+    t.boolean "is_excluded"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["jira_project_id"], name: "index_jira_projects_on_jira_project_id"
